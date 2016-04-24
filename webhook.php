@@ -204,7 +204,7 @@ function chatSimsimi()
 	$key = 'cd91050a-b416-4d63-a71d-f748345de1ee';
 	$lang = 'vn';
 	$rand = random_0_1();
-	$url = 'http://sandbox.api.simsimi.com/request.p?key='.$key.'&lc='.$lang.'&ft='.$rand.'&text='.$message;
+	$url = 'http://sandbox.api.simsimi.com/request.p?key='.$key.'&lc='.$lang.'&ft='.$rand.'&text='.urlencode($message);
 
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
