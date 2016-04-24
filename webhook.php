@@ -21,11 +21,13 @@ function subscribe()
 	$url = "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=CAAPkT5ZApWjMBABEkw1ZCI8C8OuF0vZBTKsyRyWGkfR7p5QzeCZBtcJWYlLjdgZCSFl0mlBs1vmQT1zZBcxROPCf2H0CaB4yCNMyMrDuy81I4eVEb7B1EdJDoHQFeiDQGnllbaRZCZBtJAB7bih3W0twsNjc9IOl20nFo0YnHAxDIW1ezu3ZAIV6XdrfXQnuYHZBoDNpUKiIbOfwZDZD";
 
 	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, '');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$data = curl_exec($ch);
-
-	var_dump(json_decode($result, true));
+	echo $data;
+	//var_dump(json_decode($result, true));
 }
 
 function welcome(){
