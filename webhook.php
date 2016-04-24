@@ -63,17 +63,11 @@ function reply($mes)
 	        "id":"'.$sender.'"
 	    }, 
 	    "message":{
-	        "text":"'.$mes.'"
+	        "text":"Kỳ lạ thật"
 	    }
 	}';
 
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-	curl_exec($ch);
-	curl_close($ch);
-	//return sendRequest($url, $jsonData);
+	return sendRequest($url, $jsonData);
 }
 
 /*
