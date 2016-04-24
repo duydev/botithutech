@@ -206,7 +206,13 @@ function chatSimsimi()
 	$rand = random_0_1();
 	$url = 'http://sandbox.api.simsimi.com/request.p?key='.$key.'&lc='.$lang.'&ft='.$rand.'&text='.$message;
 
-	$data = file_get_contents($url);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+	$data = curl_exec($ch);
+	curl_close($ch);
+	
 	$json = json_decode($data,true);
 	if($json['result'] !== 100)
 	{
