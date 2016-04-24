@@ -101,7 +101,7 @@ function getGuestInfo($uid)
 
 function _log($type, $data)
 {
-	$filename = $type."s.txt"
+	$filename = $type."s.txt";
 	file_put_contents($filename, date("d/M/y h:m:s").$data."\n", FILE_APPEND);
 }
 
