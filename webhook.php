@@ -188,7 +188,8 @@ function getAnswer()
 
 function autoReply()
 {
-	reply(getAnswer());
+	//reply(getAnswer());
+	reply(chatSimsimi());
 }
 
 function _log($type, $data)
@@ -197,6 +198,27 @@ function _log($type, $data)
 	file_put_contents($filename, date("d/M/y h:m:s")." - ".$data."\n", FILE_APPEND);
 }
 
+function chatSimsimi()
+{
+	global $message;
+	$key = 'cd91050a-b416-4d63-a71d-f748345de1ee';
+	$lang = 'vn';
+	$rand = random_0_1();
+	$url = 'http://sandbox.api.simsimi.com/request.p?key='.$key.'&lc='.$lang.'&ft='.$rand.'&text='.$message;
+
+	$data = file_get_contents($url);
+	$json = json_decode($data,true);
+	if($json['result'] !== 100)
+		return "Lỗi Simsimi API.";
+	return $json['response'];
+}
+
+
+function random_0_1()
+{   // auxiliary function
+    // returns random number with flat distribution from 0 to 1
+    return (float)rand()/(float)getrandmax();
+}
 
 echo "\nWorking!";
 ?>
