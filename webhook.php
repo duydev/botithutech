@@ -20,7 +20,7 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 file_put_contents('logs.txt', date("dd/MM/yyyy hh:mm:ss")." - ".$sender." - ".$message."\n", FILE_APPEND);
 
 // Init Facebook Bot...
-//subscribe();
+subscribe();
 
 echo reply("Xin chào bạn");
 
