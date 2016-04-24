@@ -32,7 +32,10 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 // Init Facebook Bot...
 // subscribe();
 
-welcome();
+// Init Welcome Message
+//welcome();
+
+getGuestInfo($sender);
 
 /* END MAIN */
 
@@ -51,6 +54,27 @@ function subscribe()
 	// echo $data;
 	//var_dump(json_decode($result, true));
 }
+
+function welcome(){
+	global $welcome_text;
+
+	$url = "https://graph.facebook.com/v2.6/".PAGE_ID."/thread_settings?access_token=".PAGE_ACCESS_TOKEN;
+
+	$jsonData = '{
+	  "setting_type":"call_to_actions",
+	  "thread_state":"new_thread",
+	  "call_to_actions":[
+	    {
+	      "message":{
+	        "text":"'.$welcome_text.'"
+	      }
+	    }
+	  ]
+	}';
+
+	echo sendRequest($url, $jsonData);
+}
+
 
 function sendRequest($url, $data = '')
 {
@@ -102,25 +126,17 @@ function reply($mes)
 	_sendRequest($url, $jsonData);
 }
 
+function getGuestInfo($uid)
+{
+	$url = "https://graph.facebook.com/v2.6/" + $uid + "?fields=first_name,last_name,profile_pic&access_token=".PAGE_ACCESS_TOKEN;
 
-function welcome(){
-	global $welcome_text;
-
-	$url = "https://graph.facebook.com/v2.6/".PAGE_ID."/thread_settings?access_token=".PAGE_ACCESS_TOKEN;
-
-	$jsonData = '{
-	  "setting_type":"call_to_actions",
-	  "thread_state":"new_thread",
-	  "call_to_actions":[
-	    {
-	      "message":{
-	        "text":"'.$welcome_text.'"
-	      }
-	    }
-	  ]
-	}';
-
-	echo sendRequest($url, $jsonData);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$data = curl_exec($ch);
+	curl_close($ch);
+	_log('trace',$data);
+	return $data;
 }
 
 /*
@@ -129,11 +145,7 @@ function getAnswer()
 	$ans = "";
 }
 
-function getGuestInfo($uid)
-{
-	$url = "https://graph.facebook.com/v2.6/" + $uid + "?fields=first_name,last_name,profile_pic&access_token=".$p_token;
 
-}
 */
 
 function _log($type, $data)
