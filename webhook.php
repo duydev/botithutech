@@ -33,9 +33,9 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 //welcome();
 
 // Ghi logs message
-	_log('messages',$sender." - ".$message);
+	_log('message',$sender." - ".$message);
 
-$guest = getGuestInfo($sender);
+$guest = getGuestInfo();
 
 
 /* END MAIN */
@@ -129,7 +129,8 @@ function reply($mes)
 
 function getGuestInfo($uid)
 {
-	$url = "https://graph.facebook.com/v2.6/" + $uid + "?fields=first_name,last_name,profile_pic&access_token=".PAGE_ACCESS_TOKEN;
+	global $sender;
+	$url = "https://graph.facebook.com/v2.6/".$sender."?fields=first_name,last_name,profile_pic&access_token=".PAGE_ACCESS_TOKEN;
 
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
