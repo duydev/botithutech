@@ -22,7 +22,7 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 // Init Facebook Bot...
 // subscribe();
 
-echo reply("Xin chào bạn");
+reply("Xin chào bạn");
 
 function subscribe()
 {
@@ -65,11 +65,11 @@ function reply($mes)
 	        "id":"'.$sender.'"
 	    }, 
 	    "message":{
-	        "text":"Kỳ lạ thật"
+	        "text":"'.$mes.'"
 	    }
 	}';
 
-	return sendRequest($url, $jsonData);
+	sendRequest($url, $jsonData);
 }
 
 /*
