@@ -87,7 +87,7 @@ function reply($mes)
 	    }
 	}';
 
-	sendRequest($url, $jsonData);
+	_sendRequest($url, $jsonData);
 }
 
 /*
