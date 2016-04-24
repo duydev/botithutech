@@ -220,6 +220,7 @@ function chatSimsimi()
 	{
 		_log('trace',"Lỗi Simsimi API: ".$json['result']." - ".$json['msg']);
 		//return chatSimsimi();
+		return '...';
 	}
 	return $json['response'];
 }
