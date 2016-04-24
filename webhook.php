@@ -17,10 +17,10 @@ $sender = $input['entry'][0]['messaging'][0]['sender']['id'];
 $message = $input['entry'][0]['messaging'][0]['message']['text'];
 
 // Ghi logs
-	_log('log',$sender." - ".$message);
+	_log('messages',$sender." - ".$message);
 
 // Init Facebook Bot...
-subscribe();
+// subscribe();
 
 echo reply("Xin chào bạn");
 
@@ -50,12 +50,13 @@ function sendRequest($url, $data = '')
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 	$data = curl_exec($ch);
 	curl_close($ch);
-	_log('error',$data);
+	_log('trace',$data);
 	return $data;
 }
 
 function reply($mes)
 {
+	global $sender;
 	$url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.PAGE_ACCESS_TOKEN;
 
 	//The JSON data.
@@ -102,7 +103,7 @@ function getGuestInfo($uid)
 function _log($type, $data)
 {
 	$filename = $type."s.txt";
-	file_put_contents($filename, date("d/M/y h:m:s").$data."\n", FILE_APPEND);
+	file_put_contents($filename, date("d/M/y h:m:s")." - ".$data."\n", FILE_APPEND);
 }
 
 ?>
