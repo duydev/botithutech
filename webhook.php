@@ -35,8 +35,7 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 // Ghi logs message
 	_log('messages',$sender." - ".$message);
 
-$guest = json_decode(getGuestInfo($sender), true);
-var_dump($guest);
+$guest = getGuestInfo($sender);
 
 
 /* END MAIN */
@@ -135,10 +134,11 @@ function getGuestInfo($uid)
 	$ch = curl_init($url);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 	$data = curl_exec($ch);
 	curl_close($ch);
 	_log('trace',$data);
-	return $data;
+	return json_decode($data, true);
 }
 
 /*
