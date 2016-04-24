@@ -20,19 +20,22 @@ file_put_contents('logs.txt', date("dd/MM/yyyy hh:mm:ss")." - ".$sender." - ".$m
 // Init Facebook Bot...
 //subscribe();
 
-echo reply("Xin chào bạn");
+subscribe();
+//echo reply("Xin chào bạn");
 
 function subscribe()
 {
 	$url = "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=".$p_token;
 
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, '');
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$data = curl_exec($ch);
-	echo $data;
+	echo sendRequest($url, '');
+
+	// $ch = curl_init($url);
+	// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	// curl_setopt($ch, CURLOPT_POST, 1);
+	// curl_setopt($ch, CURLOPT_POSTFIELDS, '');
+	// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// $data = curl_exec($ch);
+	// echo $data;
 	//var_dump(json_decode($result, true));
 }
 
