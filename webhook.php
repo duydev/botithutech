@@ -14,7 +14,19 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 
 file_put_contents('logs.txt', date("dd/MM/yyyy hh:mm:ss")." - ".$sender." - ".$message."\n", FILE_APPEND);
 
+subscribe();
 
+function subscribe()
+{
+	$url = "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=CAAPkT5ZApWjMBABEkw1ZCI8C8OuF0vZBTKsyRyWGkfR7p5QzeCZBtcJWYlLjdgZCSFl0mlBs1vmQT1zZBcxROPCf2H0CaB4yCNMyMrDuy81I4eVEb7B1EdJDoHQFeiDQGnllbaRZCZBtJAB7bih3W0twsNjc9IOl20nFo0YnHAxDIW1ezu3ZAIV6XdrfXQnuYHZBoDNpUKiIbOfwZDZD";
+
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	$data = curl_exec($ch);
+
+	var_dump(json_decode($result, true));
+}
 
 function welcome(){
 	$url = "https://graph.facebook.com/v2.6/327850837269511/thread_settings?access_token=CAAPkT5ZApWjMBALQ0dkk5wDeCuExe8MJ8jsJDN9MoEsDaG7r6mZCVJ77y2EXm5ugwmRi2ry81IF6nwreUQ24hQEqkzlTFs96zt8pj0AizihrYFZC065WUzS2vb6rjMlJjxjD5WMynOgKrRsNultasc4yInZASZBP6UFC7Y4rO7zdFz1j6FCgYtWcrf918nCQcOwDIXZAzzzgZDZD";
