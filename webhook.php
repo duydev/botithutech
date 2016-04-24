@@ -22,7 +22,7 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 // Init Facebook Bot...
 // subscribe();
 
-reply("Xin chào bạn");
+welcome();
 
 function subscribe()
 {
@@ -90,9 +90,9 @@ function reply($mes)
 	_sendRequest($url, $jsonData);
 }
 
-/*
+
 function welcome(){
-	$url = "https://graph.facebook.com/v2.6/327850837269511/thread_settings?access_token=".$p_token;
+	$url = "https://graph.facebook.com/v2.6/327850837269511/thread_settings?access_token=".PAGE_ACCESS_TOKEN;
 
 	$jsonData = '{
 	    "recipient":{
@@ -103,9 +103,10 @@ function welcome(){
 	    }
 	}';
 
-	sendRequest($url, $jsonData);
+	_sendRequest($url, $jsonData);
 }
 
+/*
 function getAnswer()
 {
 	$ans = "";
