@@ -8,6 +8,9 @@ define('PAGE_ID', '327850837269511');
 
 $welcome_text = "Chào mừng bạn đến với trang của tui!\nBạn tìm tui có gì hông? :3";
 
+/* END GLOBAL */
+
+/* BASIC */
 $challenge = $_REQUEST['hub_challenge'];
 $verify_token = $_REQUEST['hub_verify_token'];
 
@@ -20,7 +23,9 @@ $input = json_decode(file_get_contents('php://input'), true);
 // Get Guest Common Info
 $sender = $input['entry'][0]['messaging'][0]['sender']['id'];
 $message = $input['entry'][0]['messaging'][0]['message']['text'];
+/* END BASIC */
 
+/* MAIN */
 // Ghi logs
 	_log('messages',$sender." - ".$message);
 
@@ -28,6 +33,8 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 // subscribe();
 
 welcome();
+
+/* END MAIN */
 
 function subscribe()
 {
@@ -113,7 +120,7 @@ function welcome(){
 	  ]
 	}';
 
-	echo _sendRequest($url, $jsonData);
+	echo sendRequest($url, $jsonData);
 }
 
 /*
