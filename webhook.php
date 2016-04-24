@@ -12,15 +12,16 @@ if ($verify_token === 'r8P>0(GxC\pzm8VAoj9g4YNBjh_NIh@dGGqjxABT8+6i>(bX#yn5Bt[r5
 
 $input = json_decode(file_get_contents('php://input'), true);
 
+// Get Guest Common Info
 $sender = $input['entry'][0]['messaging'][0]['sender']['id'];
 $message = $input['entry'][0]['messaging'][0]['message']['text'];
 
+// Ghi logs
 file_put_contents('logs.txt', date("dd/MM/yyyy hh:mm:ss")." - ".$sender." - ".$message."\n", FILE_APPEND);
 
 // Init Facebook Bot...
-//subscribe();
-
 subscribe();
+
 //echo reply("Xin chào bạn");
 
 function subscribe()
@@ -52,7 +53,7 @@ function sendRequest($url, $data = '')
 	return $data;
 }
 
-
+/*
 function welcome(){
 	$url = "https://graph.facebook.com/v2.6/327850837269511/thread_settings?access_token=".$p_token;
 
@@ -79,19 +80,6 @@ function getGuestInfo($uid)
 
 }
 
-function sendRequest($url, $data = '')
-{
-	$ch = curl_init($url);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_POST, 1);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-	$data = curl_exec($ch);
-	curl_close($ch);
-	return $data;
-}
-
 function reply($mes)
 {
 	$url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$p_token;
@@ -108,6 +96,6 @@ function reply($mes)
 
 	return sendRequest($url, $jsonData);
 }
-
+*/
 
 ?>
