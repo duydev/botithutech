@@ -1,7 +1,7 @@
 <?php
 
 /* GLOBAL */
-global $p_token = 'CAAPkT5ZApWjMBAKCtMvPowjKMJ4ZBOC6NXIZBx1MA4bM88pozrsgiXsYJKYCLKVpJdZBz0efZBEc4MCkNN6ldc6E55b3vK6BZAfQDk6vgPPIm43oInwomEZCRpdxd6NtD2b8aNlGXNZAFDbxYqtvXBZAxwn4rFNmm1QYTXKMZBITZByqGTOUPAkY1Sm7JfYLQCAQZCppSxWzdRS7nwZDZD';
+define('PAGE_ACCESS_TOKEN', 'CAAPkT5ZApWjMBAKCtMvPowjKMJ4ZBOC6NXIZBx1MA4bM88pozrsgiXsYJKYCLKVpJdZBz0efZBEc4MCkNN6ldc6E55b3vK6BZAfQDk6vgPPIm43oInwomEZCRpdxd6NtD2b8aNlGXNZAFDbxYqtvXBZAxwn4rFNmm1QYTXKMZBITZByqGTOUPAkY1Sm7JfYLQCAQZCppSxWzdRS7nwZDZD');
 
 $challenge = $_REQUEST['hub_challenge'];
 $verify_token = $_REQUEST['hub_verify_token'];
@@ -26,7 +26,7 @@ subscribe();
 
 function subscribe()
 {
-	$url = "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=".$p_token;
+	$url = "https://graph.facebook.com/v2.6/me/subscribed_apps?access_token=".PAGE_ACCESS_TOKEN;
 
 	echo sendRequest($url, '');
 
