@@ -17,7 +17,7 @@ $sender = $input['entry'][0]['messaging'][0]['sender']['id'];
 $message = $input['entry'][0]['messaging'][0]['message']['text'];
 
 // Ghi logs
-file_put_contents('logs.txt', date("dd/MM/yyyy hh:mm:ss")." - ".$sender." - ".$message."\n", FILE_APPEND);
+	_log('log',$sender." - ".$message);
 
 // Init Facebook Bot...
 subscribe();
@@ -50,6 +50,7 @@ function sendRequest($url, $data = '')
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 	$data = curl_exec($ch);
 	curl_close($ch);
+	_log('error',$data);
 	return $data;
 }
 
@@ -98,6 +99,10 @@ function getGuestInfo($uid)
 }
 */
 
-
+function _log($type, $data)
+{
+	$filename = $type."s.txt"
+	file_put_contents($filename, date("d/M/y h:m:s").$data."\n", FILE_APPEND);
+}
 
 ?>
