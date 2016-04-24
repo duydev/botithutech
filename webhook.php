@@ -20,7 +20,7 @@ file_put_contents('logs.txt', date("dd/MM/yyyy hh:mm:ss")." - ".$sender." - ".$m
 // Init Facebook Bot...
 //subscribe();
 
-reply("Xin chào bạn");
+echo reply("Xin chào bạn");
 
 function subscribe()
 {
@@ -35,6 +35,20 @@ function subscribe()
 	echo $data;
 	//var_dump(json_decode($result, true));
 }
+
+function sendRequest($url, $data = '')
+{
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+	$data = curl_exec($ch);
+	curl_close($ch);
+	return $data;
+}
+
 
 function welcome(){
 	$url = "https://graph.facebook.com/v2.6/327850837269511/thread_settings?access_token=".$p_token;
@@ -89,7 +103,7 @@ function reply($mes)
 	    }
 	}';
 
-	sendRequest($url, $jsonData);
+	return sendRequest($url, $jsonData);
 }
 
 
