@@ -53,6 +53,23 @@ function sendRequest($url, $data = '')
 	return $data;
 }
 
+function reply($mes)
+{
+	$url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.PAGE_ACCESS_TOKEN;
+
+	//The JSON data.
+	$jsonData = '{
+	    "recipient":{
+	        "id":"'.$sender.'"
+	    }, 
+	    "message":{
+	        "text":"'.$mes.'"
+	    }
+	}';
+
+	return sendRequest($url, $jsonData);
+}
+
 /*
 function welcome(){
 	$url = "https://graph.facebook.com/v2.6/327850837269511/thread_settings?access_token=".$p_token;
@@ -81,21 +98,6 @@ function getGuestInfo($uid)
 }
 */
 
-function reply($mes)
-{
-	$url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$p_token;
 
-	//The JSON data.
-	$jsonData = '{
-	    "recipient":{
-	        "id":"'.$sender.'"
-	    }, 
-	    "message":{
-	        "text":"'.$mes.'"
-	    }
-	}';
-
-	return sendRequest($url, $jsonData);
-}
 
 ?>
