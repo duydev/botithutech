@@ -20,9 +20,9 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 file_put_contents('logs.txt', date("dd/MM/yyyy hh:mm:ss")." - ".$sender." - ".$message."\n", FILE_APPEND);
 
 // Init Facebook Bot...
-subscribe();
+//subscribe();
 
-//echo reply("Xin chào bạn");
+echo reply("Xin chào bạn");
 
 function subscribe()
 {
@@ -79,6 +79,7 @@ function getGuestInfo($uid)
 	$url = "https://graph.facebook.com/v2.6/" + $uid + "?fields=first_name,last_name,profile_pic&access_token=".$p_token;
 
 }
+*/
 
 function reply($mes)
 {
@@ -96,6 +97,5 @@ function reply($mes)
 
 	return sendRequest($url, $jsonData);
 }
-*/
 
 ?>
