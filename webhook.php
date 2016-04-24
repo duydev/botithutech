@@ -26,16 +26,18 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 /* END BASIC */
 
 /* MAIN */
-// Ghi logs
-	_log('messages',$sender." - ".$message);
-
 // Init Facebook Bot...
 // subscribe();
 
 // Init Welcome Message
 //welcome();
 
-getGuestInfo($sender);
+// Ghi logs message
+	_log('messages',$sender." - ".$message);
+
+$guest = json_decode(getGuestInfo($sender), true);
+var_dump($guest);
+
 
 /* END MAIN */
 
