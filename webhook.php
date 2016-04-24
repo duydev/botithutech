@@ -45,7 +45,7 @@ $guest = getGuestInfo();
 	_log('message',$sender." - ".$message);
 
 
-reply('Xin chào '.$guest['hoten']);
+autoReply();
 
 /* END MAIN */
 
@@ -156,14 +156,40 @@ function getGuestInfo($uid)
 	return $info;
 }
 
-/*
 function getAnswer()
 {
-	$ans = "";
+	global $message, $guest;
+	if(preg_match('/(.*?)chào(.*?)/i', $message))
+	{
+		return "Xin chào bạn ".$guest['hoten'];
+	}
+	if(preg_match('/(.*?)tên gì(.*?)/i', $message))
+	{
+		return "Tên tui là Duy Bot. :D";
+	}
+	if(preg_match('/(.*?)mấy giờ rồi(.*?)/i', $message))
+	{
+		return "Bây giờ là ".date('h:m:s');
+	}
+	if(preg_match('/(.*?)(tôi|tui) là ai(.*?)/i', $message))
+	{
+		return "Bạn là ".guest['hoten']." chứ ai. :))";
+	}
+	if(preg_match('/(.*?)khùng(.*?)/i', $message))
+	{
+		return "Thì tui có nói tui bình thường đâu... :v";
+	}
+	if(preg_match('/(.*?)bao nhiêu tuổi(.*?)/i', $message))
+	{
+		return "Tui được ".(intval(date('Y')) - 1995)." cái xuân sanh rồi.";
+	}
+	return "Ờ...";
 }
 
-
-*/
+function autoReply()
+{
+	reply(getAnswer());
+}
 
 function _log($type, $data)
 {
