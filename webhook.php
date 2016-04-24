@@ -219,7 +219,7 @@ function chatSimsimi()
 	if($json['result'] !== 100)
 	{
 		_log('trace',"Lỗi Simsimi API: ".$json['result']." - ".$json['msg']);
-		return chatSimsimi();
+		//return chatSimsimi();
 	}
 	return $json['response'];
 }
