@@ -3,6 +3,9 @@
 /* GLOBAL */
 define('PAGE_ACCESS_TOKEN', 'CAAPkT5ZApWjMBAKCtMvPowjKMJ4ZBOC6NXIZBx1MA4bM88pozrsgiXsYJKYCLKVpJdZBz0efZBEc4MCkNN6ldc6E55b3vK6BZAfQDk6vgPPIm43oInwomEZCRpdxd6NtD2b8aNlGXNZAFDbxYqtvXBZAxwn4rFNmm1QYTXKMZBITZByqGTOUPAkY1Sm7JfYLQCAQZCppSxWzdRS7nwZDZD');
 
+define('PAGE_ID', '327850837269511');
+
+
 $welcome_text = "Chào mừng bạn đến với trang của tui!\nBạn tìm tui có gì hông? :3";
 
 $challenge = $_REQUEST['hub_challenge'];
@@ -96,7 +99,7 @@ function reply($mes)
 function welcome(){
 	global $welcome_text;
 
-	$url = "https://graph.facebook.com/v2.6/327850837269511/thread_settings?access_token=".PAGE_ACCESS_TOKEN;
+	$url = "https://graph.facebook.com/v2.6/".PAGE_ID."/thread_settings?access_token=".PAGE_ACCESS_TOKEN;
 
 	$jsonData = '{
 	  "setting_type":"call_to_actions",
@@ -110,7 +113,7 @@ function welcome(){
 	  ]
 	}';
 
-	_sendRequest($url, $jsonData);
+	echo _sendRequest($url, $jsonData);
 }
 
 /*
@@ -132,4 +135,6 @@ function _log($type, $data)
 	file_put_contents($filename, date("d/M/y h:m:s")." - ".$data."\n", FILE_APPEND);
 }
 
+
+echo "\nWorking!";
 ?>
