@@ -209,7 +209,10 @@ function chatSimsimi()
 	$data = file_get_contents($url);
 	$json = json_decode($data,true);
 	if($json['result'] !== 100)
-		return "Lỗi Simsimi API.";
+	{
+		_log('trace',"Lỗi Simsimi API: ".$json['result']." - ".$json['msg']);
+		return chatSimsimi();
+	}
 	return $json['response'];
 }
 
