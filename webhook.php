@@ -212,7 +212,9 @@ function chatSimsimi()
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 	$data = curl_exec($ch);
 	curl_close($ch);
-	
+
+	_log('trace',"DATA Simsimi API: ".$data);
+
 	$json = json_decode($data,true);
 	if($json['result'] !== 100)
 	{
