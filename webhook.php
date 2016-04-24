@@ -1,5 +1,12 @@
 <?php
 
+/*******************************
+/* Trần Nhật Duy
+/* duy@ithu.tech
+/* 24/04/2016
+/* Facebook Messenger Bot 
+/*******************************
+
 /* GLOBAL */
 define('PAGE_ACCESS_TOKEN', 'CAAPkT5ZApWjMBAKCtMvPowjKMJ4ZBOC6NXIZBx1MA4bM88pozrsgiXsYJKYCLKVpJdZBz0efZBEc4MCkNN6ldc6E55b3vK6BZAfQDk6vgPPIm43oInwomEZCRpdxd6NtD2b8aNlGXNZAFDbxYqtvXBZAxwn4rFNmm1QYTXKMZBITZByqGTOUPAkY1Sm7JfYLQCAQZCppSxWzdRS7nwZDZD');
 
@@ -23,6 +30,8 @@ $input = json_decode(file_get_contents('php://input'), true);
 // Get Guest Common Info
 $sender = $input['entry'][0]['messaging'][0]['sender']['id'];
 $message = $input['entry'][0]['messaging'][0]['message']['text'];
+
+$guest = getGuestInfo();
 /* END BASIC */
 
 /* MAIN */
@@ -35,8 +44,8 @@ $message = $input['entry'][0]['messaging'][0]['message']['text'];
 // Ghi logs message
 	_log('message',$sender." - ".$message);
 
-$guest = getGuestInfo();
 
+reply('Xin chào '.$guest['hoten']);
 
 /* END MAIN */
 
@@ -139,7 +148,12 @@ function getGuestInfo($uid)
 	$data = curl_exec($ch);
 	curl_close($ch);
 	_log('trace',$data);
-	return json_decode($data, true);
+	$jsonData = json_decode($data, true);
+	$info = array(
+			'hoten' => $jsonData['last_name'].' '.$jsonData['first_name'],
+			'avatar' => $jsonData['profile_pic']
+		);
+	return $info;
 }
 
 /*
